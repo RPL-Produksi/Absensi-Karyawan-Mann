@@ -2,7 +2,7 @@
     <h2 class="text-center mb-4">Admin</h2>
     <ul class="nav flex-column">
         <li class="nav-item mb-2">
-            <a href="#" class="nav-link text-white">
+            <a href="{{ route('admin.dashboard') }}" class="nav-link text-white">
                 <i class="fas fa-home"></i> Dashboard
             </a>
         </li>
