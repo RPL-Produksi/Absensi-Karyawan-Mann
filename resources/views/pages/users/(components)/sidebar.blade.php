@@ -7,8 +7,8 @@
             </a>
         </li>
         <li class="nav-item mb-2">
-            <a href="" class="nav-link text-white">
-                <i class="fas fa-user  "></i> Profile
+            <a href="#" class="nav-link text-white" data-bs-toggle="modal" data-bs-target="#profileModal">
+                <i class="fas fa-user"></i> Profile
             </a>
         </li>
         <li class="nav-item">

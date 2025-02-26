@@ -3,6 +3,11 @@
 @section('title', 'Dashboard')
 
 @section('content')
+    @if (session('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+    @endif
     <div class="d-flex vh-100" style="min-height: 100vh;">
         <!-- Sidebar -->
         @include('pages.users.(components).sidebar')
@@ -84,16 +89,17 @@
     </div>
 
     @include('templates.logout')
+    @include('templates.profile')
 @endsection
 
 @push('js')
-<script>
-    function updateClock() {
-        const now = new Date();
-        document.getElementById('clock').textContent = now.toLocaleTimeString('id-ID');
-    }
+    <script>
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('clock').textContent = now.toLocaleTimeString('id-ID');
+        }
 
-    setInterval(updateClock, 1000);  // Update the clock every second
-    updateClock();  // Initial call to display the current time, date, and day
-</script>
+        setInterval(updateClock, 1000); // Update the clock every second
+        updateClock(); // Initial call to display the current time, date, and day
+    </script>
 @endpush
