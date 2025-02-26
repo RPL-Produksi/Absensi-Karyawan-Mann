@@ -49,4 +49,11 @@ class AuthController extends Controller
 
         return redirect()->back()->with('error', $loginType == 'email' ? 'Email' : 'Username ' . 'atau Password Salah');
     }
+
+    public function logout()
+    {
+        Auth::logout();
+
+        return redirect()->route('auth.login');
+    }
 }

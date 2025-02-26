@@ -8,6 +8,7 @@ Route::prefix('auth')->group(function () {
     Route::controller(AuthController::class)->group(function () {
         Route::get('login', 'indexLogin')->name('index.login');
         Route::post('login', 'login')->name('auth.login');
+        Route::post('logout', 'logout')->name('auth.logout');
     });
 });
 
