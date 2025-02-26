@@ -1,5 +1,5 @@
 @extends('templates.master')
-@section('title', 'Login')
+@section('title', 'Dashboard')
 
 @push('css')
     {{-- CSS Only For This Page --}}
@@ -38,16 +38,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                            @foreach ($attedances as $item)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->user->fullname }}</td>
+                                    <td>{{ $item->user->position }}</td>
+                                    <td>{{ $item->user->phone_number }}</td>
+                                    <td>{{ $item->time_in }}</td>
+                                    <td>{{ $item->time_out }}</td>
+                                    <td>{{ $item->date }}</td>
+                                    <td>1</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -66,5 +68,8 @@
     </script>
     <script>
         document.getElementById('clock').innerHTML = new Date().toLocaleTimeString();
+        setInterval(() => {
+            document.getElementById('clock').innerHTML = new Date().toLocaleTimeString();
+        }, 1000);
     </script>
 @endpush

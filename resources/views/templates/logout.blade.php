@@ -9,7 +9,7 @@
                 Pilih "Keluar" di bawah jika Anda siap mengakhiri sesi Anda saat ini.
             </div>
             <div class="modal-footer">
-                <button class="btn btn-link" type="button" data-dismiss="modal">Batal</button>
+                <button class="btn btn-link" type="button" data-bs-dismiss="modal">Batal</button>
                 <form action="{{ route('auth.logout') }}" method="POST">
                     @csrf
                     <button type="submit" class="btn btn-danger">Keluar</button>
