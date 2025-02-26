@@ -6,31 +6,25 @@
 @endpush
 
 @section('content')
-    <div class="min-h-screen flex items-center justify-center bg-gray-100">
-        <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-            <h1 class="text-2xl font-bold mb-6 text-center">Login</h1>
+    <div class="d-flex min-vh-100 align-items-center justify-content-center bg-light">
+        <div class="bg-white p-4 rounded shadow-lg w-100" style="max-width: 400px;">
+            <h1 class="fs-4 fw-bold mb-4 text-center">Login</h1>
             <form action="{{ route('auth.login', $isAdmin ? 'admin' : '') }}" method="POST">
                 @csrf
-                <div class="mb-4">
-                    <label for="login"
-                        class="block text-sm font-medium text-gray-700">{{ $isAdmin ? 'Username' : 'Email' }}</label>
-                    <input type="login" name="login" id="login" required
-                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                <div class="mb-3">
+                    <label for="login" class="form-label">{{ $isAdmin ? 'Username' : 'Email' }}</label>
+                    <input type="text" name="login" id="login" class="form-control" required>
                 </div>
-                <div class="mb-4">
-                    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                    <input type="password" name="password" id="password" required
-                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" name="password" id="password" class="form-control" required>
                 </div>
                 @if (Session::has('error'))
-                    <div class="mb-6 text-center">
-                        <span class="text-red-600">{{ Session::get('error') }}</span>
+                    <div class="mb-3 text-center text-danger">
+                        <span>{{ Session::get('error') }}</span>
                     </div>
                 @endif
-                <button type="submit"
-                    class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                    Login
-                </button>
+                <button type="submit" class="btn btn-primary w-100">Login</button>
             </form>
             <div class="mt-4 text-center">
                 <p>Don't have an account?

@@ -8,9 +8,10 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('auth')->group(function () {
     Route::controller(AuthController::class)->group(function () {
         Route::get('login', 'indexLogin')->name('index.login');
-        Route::post('login', 'login')->name('auth.login');
         Route::get('register', 'indexRegister')->name('index.register');
+        Route::post('login', 'login')->name('auth.login');
         Route::post('register', 'register')->name('auth.register');
+        Route::post('logout', 'logout')->name('auth.logout');
     });
 });
 

@@ -86,4 +86,11 @@ class AuthController extends Controller
 
         return redirect()->route('user.dashboard')->with('message', 'Registrasi Berhasil');
     }
+
+    public function logout()
+    {
+        Auth::logout();
+
+        return redirect()->route('auth.login');
+    }
 }
