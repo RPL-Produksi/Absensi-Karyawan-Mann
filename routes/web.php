@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\User\UserAttendanceController;
 use App\Http\Controllers\User\UserDashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,5 +24,9 @@ Route::middleware('auth')->group(function () {
     });
     Route::controller(UserDashboardController::class)->group(function () {
         Route::get('dashboard', 'index')->name('user.dashboard');
+    });
+    Route::controller(UserAttendanceController::class)->group(function () {
+        Route::post('attendance/check-in', 'markCheckIn')->name('check.in');
+        Route::post('attendance/check-out', 'markCheckOut')->name('check.out');
     });
 });
