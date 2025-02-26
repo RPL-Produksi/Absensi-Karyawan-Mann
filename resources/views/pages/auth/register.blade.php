@@ -6,36 +6,55 @@
 @endpush
 
 @section('content')
-    <div class="min-h-screen flex items-center justify-center bg-gray-100">
-        <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-            <h1 class="text-2xl font-bold mb-6 text-center">Register</h1>
-            <form action="{{ route('be.register') }}" method="POST">
+    <div class="d-flex min-vh-100 align-items-center justify-content-center bg-light">
+        <div class="bg-white p-4 rounded shadow-lg w-100" style="max-width: 400px;">
+            <h1 class="fs-4 fw-bold mb-4 text-center">Register</h1>
+            <form action="{{ route('auth.register') }}" method="POST">
                 @csrf
-                <div class="mb-4">
-                    <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                    <input type="text" name="name" id="name" required
-                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                <div class="mb-3">
+                    <label for="fullname" class="form-label">Fullname</label>
+                    <input type="text" name="fullname" id="fullname" class="form-control" required>
                 </div>
-                <div class="mb-4">
-                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                    <input type="email" name="email" id="email" required
-                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" name="username" id="username" class="form-control" required>
                 </div>
-                <div class="mb-6">
-                    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                    <input type="password" name="password" id="password" required
-                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" name="email" id="email" class="form-control" required>
                 </div>
-                <button type="submit"
-                    class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                    Register
-                </button>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" name="password" id="password" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password_confirmation" class="form-label">Password Confirmation</label>
+                    <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="address" class="form-label">Address</label>
+                    <input type="text" name="address" id="address" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="phone_number" class="form-label">Phone Number</label>
+                    <input type="text" name="phone_number" id="phone_number" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="position" class="form-label">Position</label>
+                    <input type="text" name="position" id="position" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Register</button>
             </form>
             <div class="mt-4 text-center">
                 <p>Already have an account?
-                    <a href="{{ route('fe.login') }}" class="text-blue-600 hover:text-blue-800">Login</a>
+                    <a href="{{ route('index.login') }}" class="text-primary">Login</a>
                 </p>
             </div>
+            @if($errors->any())
+                <div class="mb-3 text-center text-danger">
+                    <span>{{ $errors->first() }}</span>
+                </div>
+            @endif
         </div>
     </div>
 @endsection

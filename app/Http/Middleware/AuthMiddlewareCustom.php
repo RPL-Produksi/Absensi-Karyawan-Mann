@@ -20,6 +20,6 @@ class AuthMiddlewareCustom
             return $next($request);
         }
 
-        return redirect()->route('auth.login');
+        return redirect()->route('index.login');
     }
 }

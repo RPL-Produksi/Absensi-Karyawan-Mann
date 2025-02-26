@@ -10,9 +10,10 @@ class Attendance extends Model
     use HasUuids;
 
     protected $fillable = [
+        'date',
+        'time_in',
+        'time_out',
         'user_id',
-        'check_in',
-        'check_out',
     ];
 
     public function user()

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attendance;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -48,6 +50,53 @@ class AuthController extends Controller
         }
 
         return redirect()->back()->with('error', $loginType == 'email' ? 'Email' : 'Username ' . 'atau Password Salah');
+    }
+
+    public function indexRegister()
+    {
+        return view('pages.auth.register');
+    }
+
+    public function register(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'fullname' => ['required'],
+            'username' => ['required', 'unique:users,username'],
+            'email' => ['required', 'email', 'unique:users,email'],
+            'password' => ['required', 'min:6', 'confirmed'],
+            'address' => ['required'],
+            'phone_number' => ['required'],
+            'position' => ['required'],
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput();
+        }
+
+        $validateEmail = filter_var($request->email, FILTER_VALIDATE_EMAIL);
+        if (!$validateEmail) {
+            return redirect()->back()->withErrors(['error' => 'Email is not valid']);
+        }
+
+        $user = User::create([
+            'fullname' => $request->fullname,
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'address' => $request->address,
+            'phone_number' => $request->phone_number,
+            'position' => $request->position,
+            'role' => 'user',
+        ]);
+
+        Attendance::create([
+            'date' => Carbon::today(),
+            'user_id' => $user->id
+        ]);
+
+        Auth::login($user);
+
+        return redirect()->route('user.dashboard')->with('message', 'Registrasi Berhasil');
     }
 
     public function logout()

@@ -26,8 +26,10 @@
                 @endif
                 <button type="submit" class="btn btn-primary w-100">Login</button>
             </form>
-            <div class="mt-3 text-center">
-                <p>Don't have an account? <a href="" class="text-primary">Register</a></p>
+            <div class="mt-4 text-center">
+                <p>Don't have an account?
+                    <a href="{{ route('index.register') }}" class="text-blue-600 hover:text-blue-800">Register</a>
+                </p>
             </div>
         </div>
     </div>
