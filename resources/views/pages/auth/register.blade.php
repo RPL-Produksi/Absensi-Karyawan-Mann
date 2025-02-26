@@ -1,6 +1,9 @@
 @extends('templates.master')
-
 @section('title', 'Register')
+
+@push('css')
+    {{-- CSS Only For This Page --}}
+@endpush
 
 @section('content')
     <div class="min-h-screen flex items-center justify-center bg-gray-100">
@@ -36,3 +39,7 @@
         </div>
     </div>
 @endsection
+
+@push('js')
+    {{-- JS Only For This Page --}}
+@endpush
