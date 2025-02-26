@@ -20,6 +20,6 @@ class AuthMiddlewareCustom
             return $next($request);
         }
 
-        return redirect()->route('fe.login');
+        return redirect()->route('index.login');
     }
 }
