@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attendance;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -71,6 +73,11 @@ class AuthController extends Controller
             return redirect()->back()->withErrors($validator->errors())->withInput();
         }
 
+        $validateEmail = filter_var($request->email, FILTER_VALIDATE_EMAIL);
+        if (!$validateEmail) {
+            return redirect()->back()->withErrors(['error' => 'Email is not valid']);
+        }
+
         $user = User::create([
             'fullname' => $request->fullname,
             'username' => $request->username,
@@ -80,6 +87,11 @@ class AuthController extends Controller
             'phone_number' => $request->phone_number,
             'position' => $request->position,
             'role' => 'user',
+        ]);
+
+        Attendance::create([
+            'date' => Carbon::today(),
+            'user_id' => $user->id
         ]);
 
         Auth::login($user);

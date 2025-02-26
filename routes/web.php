@@ -6,6 +6,10 @@ use App\Http\Controllers\User\UserAttendanceController;
 use App\Http\Controllers\User\UserDashboardController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', function () {
+    return view('welcome');
+});
+
 Route::prefix('auth')->group(function () {
     Route::controller(AuthController::class)->group(function () {
         Route::get('login', 'indexLogin')->name('index.login');
@@ -26,7 +30,7 @@ Route::middleware('auth')->group(function () {
         Route::get('dashboard', 'index')->name('user.dashboard');
     });
     Route::controller(UserAttendanceController::class)->group(function () {
-        Route::post('attendance/check-in', 'markCheckIn')->name('check.in');
-        Route::post('attendance/check-out', 'markCheckOut')->name('check.out');
+        Route::post('/check-in', 'markCheckIn')->name('check.in');
+        Route::post('/check-out', 'markCheckOut')->name('check.out');
     });
 });
