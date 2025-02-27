@@ -8,6 +8,11 @@
             {{ session('message') }}
         </div>
     @endif
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            {{ $errors->first() }}
+        </div>
+    @endif
     <div class="d-flex vh-100" style="min-height: 100vh;">
         <!-- Sidebar -->
         @include('pages.users.(components).sidebar')

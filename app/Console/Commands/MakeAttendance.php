@@ -52,5 +52,7 @@ class MakeAttendance extends Command
                 }
             }
         });
+
+        $this->info('Success Make Attendance');
     }
 }
