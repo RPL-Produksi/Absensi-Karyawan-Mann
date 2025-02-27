@@ -7,10 +7,10 @@
 @endpush
 
 @section('content')
-    <div class="d-flex vh-100">
-        @include('pages.admin.(components).sidebar')
+    <div class="d-flex vh-100" style="min-height: 100vh;">
+        @include('templates.sidebar')
 
-        <div class="flex-grow-1 p-4">
+        <div class="flex-grow-1 p-4" style="margin-left: 250px; padding-top: 20px;">
             <header class="d-flex justify-content-between align-items-center bg-white p-3 rounded shadow-sm border">
                 <h1 class="fs-5">Data Karyawan</h1>
                 <div class="d-flex align-items-center gap-1">

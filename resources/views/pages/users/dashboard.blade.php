@@ -30,10 +30,8 @@
         </div>
     @endif
     <div class="d-flex vh-100" style="min-height: 100vh;">
-        <!-- Sidebar -->
-        @include('pages.users.(components).sidebar')
+        @include('templates.sidebar')
 
-        <!-- Main Content -->
         <div class="flex-grow-1 p-4" style="margin-left: 250px; padding-top: 20px;">
             <header class="d-flex justify-content-between align-items-center bg-white p-3 rounded shadow-sm border mb-4">
                 <h1 class="fs-5">Dashboard</h1>
@@ -42,7 +40,6 @@
                 </div>
             </header>
 
-            <!-- Attendance Table -->
             <div class="bg-white rounded shadow-sm mt-4 p-3 border">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="table-1">
@@ -71,7 +68,6 @@
                                         $attendanceDate = \Carbon\Carbon::parse($attendance->date)->format('Y-m-d');
                                     @endphp
 
-                                    <!-- Check-in -->
                                     <td>
                                         @if ($attendance->time_in && $attendanceDate === $currentDate)
                                             {{ \Carbon\Carbon::parse($attendance->time_in)->format('H:i:s') }}
@@ -86,7 +82,6 @@
                                         @endif
                                     </td>
 
-                                    <!-- Check-out -->
                                     <td>
                                         @if ($attendance->time_out && $attendanceDate === $currentDate)
                                             {{ \Carbon\Carbon::parse($attendance->time_out)->format('H:i:s') }}
@@ -141,7 +136,7 @@
             document.getElementById('clock').textContent = now.toLocaleTimeString('id-ID');
         }
 
-        setInterval(updateClock, 1000); // Update the clock every second
-        updateClock(); // Initial call to display the current time, date, and day
+        setInterval(updateClock, 1000);
+        updateClock();
     </script>
 @endpush

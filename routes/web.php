@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::redirect('/', '/auth/login');
+Route::fallback(function () {
+    return redirect()->route('index.login');
+});
 
 Route::prefix('auth')->group(function () {
     Route::controller(AuthController::class)->group(function () {
@@ -25,22 +28,27 @@ Route::prefix('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::prefix('admin')->group(function () {
-        Route::controller(AdminDashboardController::class)->group(function () {
-            Route::get('/dashboard', 'index')->name('admin.dashboard');
-        });
+        Route::middleware('can:admin')->group(function () {
+            Route::controller(AdminDashboardController::class)->group(function () {
+                Route::get('/dashboard', 'index')->name('admin.dashboard');
+            });
 
-        Route::controller(AdminNotificationController::class)->group(function () {
-            Route::get('/notifications', 'index')->name('notifications.index');
-            Route::post('/notifications/read/{id}', 'markAsRead')->name('notifications.read');
-            Route::post('/notifications/read-all', 'markAllAsRead')->name('notifications.readAll');
+            Route::controller(AdminNotificationController::class)->group(function () {
+                Route::get('/notifications', 'index')->name('notifications.index');
+                Route::post('/notifications/read/{id}', 'markAsRead')->name('notifications.read');
+                Route::post('/notifications/read-all', 'markAllAsRead')->name('notifications.readAll');
+            });
         });
     });
-    Route::controller(UserDashboardController::class)->group(function () {
-        Route::get('/dashboard', 'index')->name('user.dashboard');
-        Route::post('/profle', 'updateProfile')->name('profile');
-    });
-    Route::controller(UserAttendanceController::class)->group(function () {
-        Route::post('/check-in', 'markCheckIn')->name('check.in');
-        Route::post('/check-out', 'markCheckOut')->name('check.out');
+
+    Route::middleware('can:user')->group(function () {
+        Route::controller(UserDashboardController::class)->group(function () {
+            Route::get('/dashboard', 'index')->name('user.dashboard');
+            Route::post('/profle', 'updateProfile')->name('profile');
+        });
+        Route::controller(UserAttendanceController::class)->group(function () {
+            Route::post('/check-in', 'markCheckIn')->name('check.in');
+            Route::post('/check-out', 'markCheckOut')->name('check.out');
+        });
     });
 });

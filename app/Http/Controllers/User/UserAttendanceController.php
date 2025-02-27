@@ -13,28 +13,25 @@ class UserAttendanceController extends Controller
     {
         $attendance = Attendance::findOrFail($request->attendance_id);
 
-        // Check if the user already checked in today
         if ($attendance->time_in) {
             return redirect()->back()->with('error', 'You have already checked in.');
         }
 
-        $attendance->time_in = Carbon::now();  // Set current time for check-in
+        $attendance->time_in = Carbon::now(); 
         $attendance->save();
 
         return redirect()->route('user.dashboard')->with('success', 'Checked in successfully!');
     }
 
-    // Mark Check-out (POST)
     public function markCheckOut(Request $request)
     {
         $attendance = Attendance::findOrFail($request->attendance_id);
 
-        // Check if the user already checked out today
         if ($attendance->time_out) {
             return redirect()->back()->with('error', 'You have already checked out.');
         }
 
-        $attendance->time_out = Carbon::now();  // Set current time for check-out
+        $attendance->time_out = Carbon::now(); 
         $attendance->save();
 
         return redirect()->route('user.dashboard')->with('success', 'Checked out successfully!');
