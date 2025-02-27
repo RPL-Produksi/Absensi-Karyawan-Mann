@@ -1,5 +1,5 @@
 @extends('templates.master')
-@section('title', 'Dashboard')
+@section('title', 'Notification')
 
 @push('css')
     {{-- CSS Only For This Page --}}
