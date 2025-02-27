@@ -33,7 +33,7 @@ Untuk menjalankan aplikasi Absensi Karyawan ini, beberapa konfigurasi dasar perl
   FILESYSTEM_DISK=public
   ```
 - **Credentials Admin**: Credentials admin, di simpan pada `.env` supaya lebih aman, dan berikut contohnya
-  ```dotentv
+  ```dotenv
   ADMIN_FULLNAME="Admin"
   ADMIN_USERNAME="admin"
   ADMIN_EMAIL="admin@example.com"
