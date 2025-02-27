@@ -38,16 +38,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($attedances as $item)
+                            @foreach ($attendances as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->user->fullname }}</td>
                                     <td>{{ $item->user->position }}</td>
                                     <td>{{ $item->user->phone_number }}</td>
-                                    <td>{{ $item->time_in }}</td>
-                                    <td>{{ $item->time_out }}</td>
+                                    <td>{{ $item->time_in ?? 'Belum Absen' }}</td>
+                                    <td>{{ $item->time_out ?? 'Belum Absen' }}</td>
                                     <td>{{ $item->date }}</td>
-                                    <td>1</td>
+                                    <td>{{ $item->total_kehadiran }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

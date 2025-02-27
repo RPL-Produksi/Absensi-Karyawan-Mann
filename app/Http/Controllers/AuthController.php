@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
+use App\Models\Notification;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -87,6 +88,14 @@ class AuthController extends Controller
             'phone_number' => $request->phone_number,
             'position' => $request->position,
             'role' => 'user',
+        ]);
+
+        $admin = User::where('role', 'admin')->first();
+
+        Notification::create([
+            'user_id' => $admin->id,
+            'message' => "{$user->fullname} baru saja mendaftar",
+            'is_read' => false,
         ]);
 
         Attendance::create([

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminNotificationController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\User\UserAttendanceController;
 use App\Http\Controllers\User\UserDashboardController;
@@ -24,6 +25,11 @@ Route::middleware('auth')->group(function () {
     Route::prefix('admin')->group(function () {
         Route::controller(AdminDashboardController::class)->group(function () {
             Route::get('dashboard', 'index')->name('admin.dashboard');
+        });
+
+        Route::controller(AdminNotificationController::class)->group(function () {
+            Route::get('/notifications', 'index')->name('notifications.index');
+            Route::post('/notifications/read/{id}', 'markAsRead')->name('notifications.read');
         });
     });
     Route::controller(UserDashboardController::class)->group(function () {
