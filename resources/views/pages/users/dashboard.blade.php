@@ -1,6 +1,22 @@
 @extends('templates.master')
 
 @section('title', 'Dashboard')
+@push('css')
+    <link rel="stylesheet" href="{{ asset('vendor/DataTables/datatables.min.css') }}">
+    <style>
+        .chart-container {
+            margin-top: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            max-height: 500px;
+            margin-left: 10px;
+        }
+    </style>
+@endpush
 
 @section('content')
     @if (session('message'))
@@ -88,6 +104,10 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div>
+                        <h3 class="fs-5">Data Kehadiran</h3>
+                        <canvas id="chartAttendance" class="chart-container"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
@@ -98,7 +118,24 @@
 @endsection
 
 @push('js')
+    <script src="{{ asset('vendor/DataTables/datatables.min.js') }}"></script>
+
     <script>
+        $('#table-1').DataTable();
+    </script>
+    <script>
+        const ctx = document.getElementById('chartAttendance').getContext('2d');
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Hadir', 'Tidak Hadir'],
+                datasets: [{
+                    data: {!! json_encode($dataAttendances) !!},
+                    backgroundColor: ['#28a745', '#dc3545']
+                }]
+            }
+        });
+
         function updateClock() {
             const now = new Date();
             document.getElementById('clock').textContent = now.toLocaleTimeString('id-ID');

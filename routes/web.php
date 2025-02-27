@@ -7,17 +7,19 @@ use App\Http\Controllers\User\UserAttendanceController;
 use App\Http\Controllers\User\UserDashboardController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::redirect('/', '/auth/login');
 
 Route::prefix('auth')->group(function () {
     Route::controller(AuthController::class)->group(function () {
-        Route::get('login', 'indexLogin')->name('index.login');
-        Route::get('register', 'indexRegister')->name('index.register');
-        Route::post('login', 'login')->name('auth.login');
-        Route::post('register', 'register')->name('auth.register');
-        Route::post('logout', 'logout')->name('auth.logout');
+        Route::get('/login', 'indexLogin')->name('index.login');
+        Route::get('/register', 'indexRegister')->name('index.register');
+        Route::post('/login', 'login')->name('auth.login');
+        Route::post('/register', 'register')->name('auth.register');
+        Route::post('/logout', 'logout')->name('auth.logout');
     });
 });
 
