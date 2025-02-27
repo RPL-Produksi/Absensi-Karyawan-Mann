@@ -10,6 +10,8 @@ class Notification extends Model
     use HasUuids;
 
     protected $fillable = [
-        'user_id'
+        'user_id',
+        'message',
+        'is_read'
     ];
 }
