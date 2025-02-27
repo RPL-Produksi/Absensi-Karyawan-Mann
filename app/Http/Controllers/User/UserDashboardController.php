@@ -23,11 +23,10 @@ class UserDashboardController extends Controller
     {
         $user = $request->user();
 
-        $validator = Validator::make([
+        $validator = Validator::make($request->all(), [
             'fullname' => ['required'],
             'username' => ['required', 'unique:users,username,' . $user->id],
             'email' => ['required', 'email', 'unique:users,email,' . $user->id],
-            'password' => ['required', 'min:6', 'confirmed'],
             'address' => ['required'],
             'phone_number' => ['required'],
             'position' => ['required'],
@@ -36,5 +35,18 @@ class UserDashboardController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors());
         }
+
+        $validateEmail = filter_var($request->email, FILTER_VALIDATE_EMAIL);
+        if (!$validateEmail) {
+            return redirect()->back()->withErrors(['error' => 'Email is not valid']);
+        }
+
+        $data = $request->all();
+        $user->update($data);
+
+        if ($user->role == 'admin') {
+            return redirect()->route('admin.dashboard')->with(['message' => 'Profile updated Successfully']);
+        }
+        return redirect()->route('user.dashboard')->with(['message' => 'Profile updated Successfully']);
     }
 }

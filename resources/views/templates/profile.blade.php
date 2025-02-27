@@ -7,7 +7,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="#" method="POST">
+                <form action="{{ route('profile') }}" method="POST">
                     @csrf
                     <!-- Full Name -->
                     <div class="mb-3">
@@ -43,16 +43,6 @@
                     <div class="mb-3">
                         <label for="position" class="form-label">Position</label>
                         <input type="text" class="form-control" id="position" name="position" value="{{ auth()->user()->position }}" required>
-                    </div>
-
-                    <!-- Password -->
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Leave empty to keep the current password">
-                    </div>
-                    <div class="mb-3">
-                        <label for="password_confirmation" class="form-label">password_confirmation</label>
-                        <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Leave empty to keep the current password">
                     </div>
 
                     <!-- Submit Button -->

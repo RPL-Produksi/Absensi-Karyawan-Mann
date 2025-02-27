@@ -23,11 +23,12 @@ Route::prefix('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::prefix('admin')->group(function () {
         Route::controller(AdminDashboardController::class)->group(function () {
-            Route::get('dashboard', 'index')->name('admin.dashboard');
+            Route::get('/dashboard', 'index')->name('admin.dashboard');
         });
     });
     Route::controller(UserDashboardController::class)->group(function () {
-        Route::get('dashboard', 'index')->name('user.dashboard');
+        Route::get('/dashboard', 'index')->name('user.dashboard');
+        Route::post('/profle', 'updateProfile')->name('profile');
     });
     Route::controller(UserAttendanceController::class)->group(function () {
         Route::post('/check-in', 'markCheckIn')->name('check.in');
