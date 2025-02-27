@@ -16,7 +16,11 @@ class UserDashboardController extends Controller
         $attendances->map(function ($attendance) {
             $attendance->day = date('l', strtotime($attendance->date));
         });
-        return view('pages.users.dashboard', compact('attendances'));
+        $dataAttendances = [
+            $attendances->whereNotNull('time_in')->count(),
+            $attendances->whereNull('time_in')->count()
+        ];
+        return view('pages.users.dashboard', compact('attendances', 'dataAttendances'));
     }
 
     public function updateProfile(Request $request)
