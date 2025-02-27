@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function () {
         Route::controller(AdminNotificationController::class)->group(function () {
             Route::get('/notifications', 'index')->name('notifications.index');
             Route::post('/notifications/read/{id}', 'markAsRead')->name('notifications.read');
+            Route::post('/notifications/read-all', 'markAllAsRead')->name('notifications.readAll');
         });
     });
     Route::controller(UserDashboardController::class)->group(function () {

@@ -27,7 +27,7 @@
                     <table class="table table-bordered" id="table-1">
                         <thead class="text-white">
                             <tr>
-                                <th>No.</th>
+                                <th class="text-center">No.</th>
                                 <th>Nama</th>
                                 <th>Jabatan</th>
                                 <th>No Telp</th>
@@ -40,7 +40,7 @@
                         <tbody>
                             @foreach ($attendances as $item)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td class="text-center">{{ $loop->iteration }}</td>
                                     <td>{{ $item->user->fullname }}</td>
                                     <td>{{ $item->user->position }}</td>
                                     <td>{{ $item->user->phone_number }}</td>

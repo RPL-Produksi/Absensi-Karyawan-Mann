@@ -14,7 +14,10 @@
             <header class="d-flex justify-content-between align-items-center bg-white p-3 rounded shadow-sm border">
                 <h1 class="fs-5">Notifikasi</h1>
                 <div class="d-flex align-items-center gap-1">
-                    <button class="btn btn-primary"><i class="fas fa-eye"></i> Baca Semua</button>
+                    <form action="{{ route('notifications.readAll') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-eye"></i> Baca Semua</button>
+                    </form>
                 </div>
             </header>
 
@@ -23,7 +26,7 @@
                     <table class="table table-bordered" id="table-1">
                         <thead class="text-white">
                             <tr>
-                                <th>No.</th>
+                                <th class="text-center">No.</th>
                                 <th>Pesan</th>
                                 <th>Aksi</th>
                             </tr>
@@ -31,7 +34,7 @@
                         <tbody>
                             @foreach ($notifications as $item)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td class="text-center">{{ $loop->iteration }}</td>
                                     <td>{{ $item->message }}</td>
                                     <td>
                                         @if (!$item->is_read)

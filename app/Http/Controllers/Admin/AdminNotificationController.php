@@ -25,4 +25,11 @@ class AdminNotificationController extends Controller
 
         return redirect()->back();
     }
+
+    public function markAllAsRead()
+    {
+        Notification::where('user_id', auth()->id())->where('is_read', false)->update(['is_read' => true]);
+
+        return back()->with('success', 'Semua notifikasi telah dibaca.');
+    }
 }
