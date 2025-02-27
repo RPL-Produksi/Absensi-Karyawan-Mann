@@ -1,31 +1,40 @@
 @extends('templates.master')
-
 @section('title', 'Login')
 
+@push('css')
+    {{-- CSS Only For This Page --}}
+@endpush
+
 @section('content')
-    <div class="min-h-screen flex items-center justify-center bg-gray-100">
-        <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-            <h1 class="text-2xl font-bold mb-6 text-center">Login</h1>
-            <form action="{{ route('be.login') }}" method="POST">
+    <div class="d-flex min-vh-100 align-items-center justify-content-center bg-light">
+        <div class="bg-white p-4 rounded shadow-lg w-100" style="max-width: 400px;">
+            <h1 class="fs-4 fw-bold mb-4 text-center">Login</h1>
+            <form action="{{ route('auth.login', $isAdmin ? 'admin' : '') }}" method="POST">
                 @csrf
-                <div class="mb-4">
-                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                    <input type="email" name="email" id="email" required
-                           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                <div class="mb-3">
+                    <label for="login" class="form-label">{{ $isAdmin ? 'Username' : 'Email' }}</label>
+                    <input type="{{ $isAdmin ? 'text' : 'email' }}" name="login" id="login" class="form-control" required>
                 </div>
-                <div class="mb-6">
-                    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                    <input type="password" name="password" id="password" required
-                           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" name="password" id="password" class="form-control" required>
                 </div>
-                <button type="submit"
-                        class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                    Login
-                </button>
+                @if (Session::has('error'))
+                    <div class="mb-3 text-center text-danger">
+                        <span>{{ Session::get('error') }}</span>
+                    </div>
+                @endif
+                <button type="submit" class="btn btn-primary w-100">Login</button>
             </form>
             <div class="mt-4 text-center">
-                <a href="{{ route('fe.register') }}" class="text-blue-600 hover:text-blue-800">Don't have an account? Register</a>
+                <p>Don't have an account?
+                    <a href="{{ route('index.register') }}" class="text-blue-600 hover:text-blue-800">Register</a>
+                </p>
             </div>
         </div>
     </div>
 @endsection
+
+@push('js')
+    {{-- JS Only For This Page --}}
+@endpush

@@ -5,19 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
-class Attendance extends Model
+class Notification extends Model
 {
     use HasUuids;
 
     protected $fillable = [
-        'date',
-        'time_in',
-        'time_out',
         'user_id',
+        'message',
+        'is_read'
     ];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
 }
